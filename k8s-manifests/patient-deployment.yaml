@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-service
+  labels:
+    app: patient-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: patient-service
+  template:
+    metadata:
+      labels:
+        app: patient-service
+    spec:
+      containers:
+        - name: patient-service
+          image: us-central1-docker.pkg.dev/fluid-acrobat-440707-v4/my-repo/patient-service:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+

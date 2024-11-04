@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"  # Use GCE ingress controller on GKE
+spec:
+  rules:
+    - host: patient.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: patient-service
+                port:
+                  number: 80
+    - host: appointment.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: appointment-service
+                port:
+                  number: 80
+

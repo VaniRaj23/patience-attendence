@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-service
+  labels:
+    app: appointment-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: appointment-service
+  template:
+    metadata:
+      labels:
+        app: appointment-service
+    spec:
+      containers:
+        - name: appointment-service
+          image: us-central1-docker.pkg.dev/fluid-acrobat-440707-v4/my-repo/appointment-service:latest
+          ports:
+            - containerPort: 4000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+
